@@ -41,11 +41,11 @@ const resolvers = {
         const updatedUser = await User.findOneAndUpdate(
           { _id: context.user._id },
           { $addToSet: { savedBooks: bookData } },
-          { new: true }
-        ).populate("books");
+          { new: true, runValidators: true }
+        );
         return updatedUser;
       }
-      throw new AuthenticationError;
+      throw new AuthenticationError();
     },
     removeBook: async (parent, { bookId }, context) => {
       if (context.user) {
@@ -56,7 +56,7 @@ const resolvers = {
         );
         return updatedUser;
       }
-      throw new AuthenticationError;
+      throw new AuthenticationError();
     },
   },
 };

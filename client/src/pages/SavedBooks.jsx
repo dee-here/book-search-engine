@@ -53,12 +53,17 @@ const SavedBooks = () => {
     }
 
     try {
-      const {data} = await removeBook({ variables: { bookId } });
+      const {data} = await removeBook({ 
+        variables: { bookId },
+        refetchQueries: {
+          query: QUERY_ME
+        }
+       });
       removeBookId(bookId);
 
-      // if (!response.ok) {
-      //   throw new Error("something went wrong!");
-      // }
+      if (!data?.removeBook) {
+        throw new Error("something went wrong!");
+      }
 
       //const updatedUser = await response.json();
       // setUserData(updatedUser);
