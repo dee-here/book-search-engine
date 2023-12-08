@@ -14,7 +14,7 @@ input BookInput {
     _id: ID
     bookId: String!
     authors: [String]
-    description: String!
+    description: String
     image: String
     link: String
     title: String!  
